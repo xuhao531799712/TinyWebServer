@@ -1,8 +1,6 @@
-
-
 TinyWebServer
 ===============
-Linux下C++轻量级Web服务器，助力初学者快速实践网络编程，搭建属于自己的服务器.
+Linux下C++轻量级Web服务器.
 
 * 使用 **线程池 + 非阻塞socket + epoll(ET和LT均实现) + 事件处理(Reactor和模拟Proactor均实现)** 的并发模型
 * 使用**状态机**解析HTTP请求报文，支持解析**GET和POST**请求
@@ -22,14 +20,14 @@ Linux下C++轻量级Web服务器，助力初学者快速实践网络编程，搭
 
 > * C/C++
 > * B/S模型
-> * [线程同步机制包装类](https://github.com/qinguoyi/TinyWebServer/tree/master/lock)
-> * [http连接请求处理类](https://github.com/qinguoyi/TinyWebServer/tree/master/http)
-> * [半同步/半反应堆线程池](https://github.com/qinguoyi/TinyWebServer/tree/master/threadpool)
-> * [定时器处理非活动连接](https://github.com/qinguoyi/TinyWebServer/tree/master/timer)
-> * [同步/异步日志系统 ](https://github.com/qinguoyi/TinyWebServer/tree/master/log)  
-> * [数据库连接池](https://github.com/qinguoyi/TinyWebServer/tree/master/CGImysql) 
-> * [同步线程注册和登录校验](https://github.com/qinguoyi/TinyWebServer/tree/master/CGImysql) 
-> * [简易服务器压力测试](https://github.com/qinguoyi/TinyWebServer/tree/master/test_presure)
+> * [线程同步机制包装类](https://github.com/xuhao531799712/TinyWebServer/tree/master/lock)
+> * [http连接请求处理类](https://github.com/xuhao531799712/TinyWebServer/tree/master/http)
+> * [半同步/半反应堆线程池](https://github.com/xuhao531799712/TinyWebServer/tree/master/threadpool)
+> * [定时器处理非活动连接](https://github.com/xuhao531799712/TinyWebServer/tree/master/timer)
+> * [同步/异步日志系统 ](https://github.com/xuhao531799712/TinyWebServer/tree/master/log)  
+> * [数据库连接池](https://github.com/xuhao531799712/TinyWebServer/tree/master/CGImysql) 
+> * [同步线程注册和登录校验](https://github.com/xuhao531799712/TinyWebServer/tree/master/CGImysql) 
+> * [简易服务器压力测试](https://github.com/xuhao531799712/TinyWebServer/tree/master/test_presure)
 
 
 框架
@@ -85,35 +83,6 @@ Demo演示
 
 **注意：** 使用本项目的webbench进行压测时，若报错显示webbench命令找不到，将可执行文件webbench删除后，重新编译即可。
 
-更新日志
--------
-- [x] 解决请求服务器上大文件的Bug
-- [x] 增加请求视频文件的页面
-- [x] 解决数据库同步校验内存泄漏
-- [x] 实现非阻塞模式下的ET和LT触发，并完成压力测试
-- [x] 完善`lock.h`中的封装类，统一使用该同步机制
-- [x] 改进代码结构，更新局部变量懒汉单例模式
-- [x] 优化数据库连接池信号量与代码结构
-- [x] 使用RAII机制优化数据库连接的获取与释放
-- [x] 优化代码结构，封装工具类以减少全局变量
-- [x] 编译一次即可，命令行进行个性化测试更加友好
-- [x] main函数封装重构
-- [x] 新增命令行日志开关，关闭日志后更新压力测试结果
-- [x] 改进编译方式，只配置一次SQL信息即可
-- [x] 新增Reactor模式，并完成压力测试
-
-源码下载
--------
-目前有两个版本，版本间的代码结构有较大改动，文档和代码运行方法也不一致。重构版本更简洁，原始版本(raw_version)更大保留游双代码的原汁原味，从原始版本更容易入手.
-
-如果遇到github代码下载失败，或访问太慢，可以从以下链接下载，与Github最新提交同步.
-
-* 重构版本下载地址 : [BaiduYun](https://pan.baidu.com/s/1PozKji8Oop-1BYcfixZR0g)
-    *  提取码 : vsqq
-* 原始版本(raw_version)下载地址 : [BaiduYun](https://pan.baidu.com/s/1asMNDW-zog92DZY1Oa4kaQ)
-    * 提取码 : 9wye
-    * 原始版本运行请参考[原始文档](https://github.com/qinguoyi/TinyWebServer/tree/raw_version)
-
 快速运行
 ------------
 * 服务器测试环境
@@ -123,7 +92,6 @@ Demo演示
 	* Windows、Linux均可
 	* Chrome
 	* FireFox
-	* 其他浏览器暂无测试
 
 * 测试前确认已安装MySQL数据库
 
@@ -148,7 +116,7 @@ Demo演示
     //数据库登录名,密码,库名
     string user = "root";
     string passwd = "root";
-    string databasename = "yourdb";
+    string databasename = "xxxxh";
     ```
 
 * build
@@ -219,7 +187,7 @@ Demo演示
 
 庖丁解牛
 ------------
-近期版本迭代较快，以下内容多以旧版本(raw_version)代码为蓝本进行详解.
+以下内容多以旧版本(raw_version)代码为蓝本进行详解.
 
 * [小白视角：一文读懂社长的TinyWebServer](https://huixxi.github.io/2020/06/02/%E5%B0%8F%E7%99%BD%E8%A7%86%E8%A7%92%EF%BC%9A%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%E7%A4%BE%E9%95%BF%E7%9A%84TinyWebServer/#more)
 * [最新版Web服务器项目详解 - 01 线程同步机制封装类](https://mp.weixin.qq.com/s?__biz=MzAxNzU2MzcwMw==&mid=2649274278&idx=3&sn=5840ff698e3f963c7855d702e842ec47&chksm=83ffbefeb48837e86fed9754986bca6db364a6fe2e2923549a378e8e5dec6e3cf732cdb198e2&scene=0&xtrack=1#rd)
@@ -243,6 +211,7 @@ CPP11实现
 
 致谢
 ------------
-Linux高性能服务器编程，游双著.
-
-感谢以下朋友的PR和帮助: [@RownH](https://github.com/RownH)，[@mapleFU](https://github.com/mapleFU)，[@ZWiley](https://github.com/ZWiley)，[@zjuHong](https://github.com/zjuHong)，[@mamil](https://github.com/mamil)，[@byfate](https://github.com/byfate)，[@MaJun827](https://github.com/MaJun827)，[@BBLiu-coder](https://github.com/BBLiu-coder)，[@smoky96](https://github.com/smoky96)，[@yfBong](https://github.com/yfBong)，[@liuwuyao](https://github.com/liuwuyao)，[@Huixxi](https://github.com/Huixxi)，[@markparticle](https://github.com/markparticle).
+项目地址：https://github.com/qinguoyi/TinyWebServer
+入门学习了Linux的系统编程和网路编程，应该写一个小项目来练练手啦。这里模仿的是Github上一个开源项目：TinyWebServer.
+非常感谢社长（TinyWebServer项目owner）的项目，项目代码量不算多，但是麻雀虽小五脏俱全，是一个非常好的把学过的各个知识点串在一起的小项目.
+阅读本文或者说要完全理解这个项目需要有Linux系统编程基础和网络编程基础，以及对计算机网路和http有一定了解.
